@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gabriel Xavier Vidal | Portfólio</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f5f7fc 0%, #eef2f5 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* MENU FIXO NO TOPO */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.75rem 1.8rem;
+            margin: 0 0.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #eef2ff;
+            letter-spacing: 0.3px;
+            font-family: inherit;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            background: #2c3e66;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+        }
+
+        /* Área de conteúdo principal */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 110px 2rem 3rem 2rem;
+            min-height: 100vh;
+        }
+
+        /* Estilos das seções dinâmicas */
+        .section-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            padding: 2rem 2rem 2.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* foto pessoal + grid */
+        .profile-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2);
+            border: 4px solid white;
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .hobbies-list, .contact-grid, .courses-list, .portfolio-grid {
+            margin-top: 1.5rem;
+        }
+
+        .hobbies-list ul, .courses-list ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .hobbies-list li, .courses-list li {
+            background: #eef2ff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .courses-list li i, .hobbies-list li i {
+            color: #2563eb;
+            font-size: 1.1rem;
+        }
+
+        /* contatos lado a lado */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+
+        .contact-item {
+            background: #f8fafc;
+            border-radius: 1.5rem;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            transition: 0.2s;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            width: 45px;
+            color: #2563eb;
+        }
+
+        .contact-item span {
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        /* portfólio cards */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .portfolio-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 12px 18px -10px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            border: 1px solid #e9edf2;
+        }
+
+        .portfolio-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            color: #0f2b3d;
+        }
+
+        .portfolio-card p {
+            color: #334155;
+            margin: 0.75rem 0;
+            line-height: 1.5;
+        }
+
+        .badge-projeto {
+            display: inline-block;
+            background: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #0369a1;
+            margin-top: 0.5rem;
+        }
+
+        /* Formulário contato */
+        .contact-form {
+            margin-top: 2.5rem;
+            background: #f1f5f9;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            border: 1px solid #cbd5e1;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 1.2rem;
+            border: 1px solid #cbd5e6;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+        .error-msg {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .btn-submit {
+            background: #3b82f6;
+            border: none;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #2563eb;
+            transform: scale(0.98);
+        }
+
+        .toast-message {
+            margin-top: 1rem;
+            padding: 0.7rem;
+            border-radius: 3rem;
+            text-align: center;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 500;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border-color: #e2e8f0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #5d6e85;
+        }
+
+        @media (max-width: 750px) {
+            .nav-container {
+                gap: 0.2rem;
+            }
+            .nav-link {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .page-container {
+                padding: 110px 1rem 2rem 1rem;
+            }
+            .profile-row {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-item i {
+                font-size: 1.6rem;
+            }
+        }
+
+        .edit-tag {
+            background: #fff9c6;
+            border-left: 4px solid #facc15;
+            padding: 0.3rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 0.4rem;
+            font-weight: normal;
+        }
+
+        .idioma-badge {
+            background: #e6f0ff;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <button class="nav-link" data-page="sobre"><i class="fas fa-user-astronaut"></i> Sobre mim</button>
+        <button class="nav-link" data-page="formacao"><i class="fas fa-graduation-cap"></i> Formação</button>
+        <button class="nav-link" data-page="portfolio"><i class="fas fa-folder-open"></i> Portfólio</button>
+        <button class="nav-link" data-page="contato"><i class="fas fa-envelope"></i> Contato</button>
+    </div>
+</nav>
+
+<div id="app-root" class="page-container"></div>
+
+<footer>
+    <p>© 2025 Gabriel Xavier Vidal | Portfólio online</p>
+</footer>
+
+<script>
+    
+    const personalData = {
+        /*Apresentação inicial "sobre mim"*/
+        fotoPessoal: "minhaFoto.jpeg",
+        apresentacao: "Olá, sou Gabriel Xavier Vidal, estudante de Ciência da Computação na UNINTER. Possuo formação na área da nutrição e agora tenho novos objetivos dentro da área de computação. Gosto muito de usar a criatividade para realização de tarefas e desenvolvimento, buscando inovar ao mesmo tempo buscar conhecimento na área da programação e sistemas de análise. Almejo alcançar um desempenho satisfatório para trabalhar nesta área e crescer profissionalmente.",
+        
+        /*Meus Hobbies*/
+        hobbies: [
+            { nome: "Atividades físicas", icone: "fas fa-dumbbell" },
+            { nome: "Atividades ao ar livre", icone: "fas fa-tree" },
+            { nome: "Leitura Clássica", icone: "fas fa-book-open" },
+            { nome: "Jogos virtuais", icone: "fas fa-gamepad" },
+            { nome: "Estudar programação", icone: "fas fa-laptop-code" }
+        ],
+        
+        /*Cursos complementares*/
+        cursos: [
+            "Elétrica Predial (Senai)",
+            "Nutrição Esportiva (Udemy)",
+            "Saúde e Segurança do Trabalho (TRT4)",
+            "Ocupações Administrativas (Senac)",
+            "Fundamentos de TI (Bradesco)",
+            "Hardware e Software (Bradesco)",
+            "English for Business (CISCO)",
+            "Introdução a LOT (CISCO)",
+            "Python Express (CISCO)",
+            "Python Essentials 1 (CISCO)",
+            "Python Essentials 2 (CISCO)"
+        ],
+        
+        /*Idiomas*/
+        idiomas: [
+            { nome: "Português (nativo)", bandeira: "🇧🇷", icone: "fas fa-language" },
+            { nome: "Inglês (Intermediário)", bandeira: "🇺🇸", icone: "fas fa-language" }
+        ],
+        
+        /*Formações acadêmicas/oficiais*/
+        formacoesAcademicas: [
+            "Ensino Médio Completo (EEEM Ernesto Alves de Oliveira)",
+            "Técnico em Nutrição (POLIESPORTIVO)",
+            "Ensino Superior em andamento - Ciência da Computação (UNINTER)"
+        ],
+        
+        /*Portfólio*/
+        projetos: [
+            {
+                titulo: "Atividade Extensionista - Geração de Cardápios Inteligentes",
+                descricao: "Criação de um software que gera cardápios simples baseados em preferências gastronômicas e objetivos pessoais definidos. Ferramenta desenvolvida para auxiliar no planejamento alimentar com base em metas individuais.",
+                tech: "Python, HTML/CSS, Lógica Fuzzy",
+                link: "AtiviExten.pdf",
+                linkText: "Saiba mais sobre o projeto"
+            }
+        ],
+        
+        /*Contatos pessoais*/
+        contatosLista: {
+            nome: "Gabriel Xavier Vidal",
+            email: "gabrielxaviero2017@gmail.com",
+            telefone: "(51) 99720-0149",
+            whatsapp: "(51) 99720-0149"
+        }
+    };
+
+    /*Ajuste de foto de perfil e configuração de icones em hobbies*/
+    function renderSobre() {
+        return `
+            <div class="section-card">
+                <div class="profile-row">
+                    <img src="${personalData.fotoPessoal}" alt="Foto de Gabriel Xavier Vidal" class="profile-img" onerror="this.src='https://placehold.co/400x400?text=Gabriel+Vidal'">
+                    <div class="intro-text">
+                        <h2><i class="fas fa-smile-wink"></i> Sobre mim</h2>
+                        <p style="font-size:1.1rem; margin-top:0.5rem; line-height:1.5;">${personalData.apresentacao}</p>
+                    </div>
+                </div>
+                <div class="hobbies-list">
+                    <h3><i class="fas fa-heart"></i> Meus Hobbies & Interesses</h3>
+                    <ul>
+                        ${personalData.hobbies.map(h => `<li><i class="${h.icone}"></i> ${h.nome}</li>`).join('')}
+                    </ul>
+                    
+                </div>
+            </div>
+        `;
+    }
+
+     /*configuração página formação*/
+    function renderFormacao() {
+        return `
+            <div class="section-card">
+                <h2><i class="fas fa-certificate"></i> Formação & Especializações</h2>
+                <div class="courses-list">
+                    <h3><i class="fas fa-laptop-code"></i> Cursos Complementares</h3>
+                    <ul>
+                        ${personalData.cursos.map(cur => `<li><i class="fas fa-check-circle"></i> ${cur}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="courses-list" style="margin-top:1.8rem;">
+                    <h3><i class="fas fa-globe-americas"></i> Idiomas</h3>
+                    <ul>
+                        ${personalData.idiomas.map(idioma => `<li><i class="${idioma.icone}"></i> ${idioma.bandeira} ${idioma.nome}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="courses-list" style="margin-top:1.8rem;">
+                    <h3><i class="fas fa-university"></i> Formações Pessoais / Oficiais</h3>
+                    <ul>
+                        ${personalData.formacoesAcademicas.map(f => `<li><i class="fas fa-graduation-cap"></i> ${f}</li>`).join('')}
+                    </ul>
+                </div>
+                
+            </div>
+        `;
+    }
+
+    /*configuração página do portifólio*/
+    function renderPortfolio() {
+        return `
+            <div class="section-card">
+                <h2><i class="fas fa-briefcase"></i> Meus Trabalhos e Projetos</h2>
+                <div class="portfolio-grid">
+                    ${personalData.projetos.map(proj => `
+                        <div class="portfolio-card">
+                            <h3><i class="fas fa-code-branch"></i> ${proj.titulo}</h3>
+                            <p>${proj.descricao}</p>
+                            <div style="margin-top: 1rem;">
+                                <a href="${proj.link}" class="btn-link" style="background:#white;" target="_blank"><i class="fas fa-external-link-alt"></i> ${proj.linkText}</a>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+            </div>
+        `;
+    }
+
+     /*configuração página de contatos*/
+    function renderContato() {
+    return `
+        <div class="section-card">
+            <h2><i class="fas fa-address-card"></i> Meus Contatos</h2>
+            <div class="profile-row" style="margin-top:0; display: flex; justify-content: center; align-items: center;">
+                <img src="${personalData.fotoPessoal}" alt="foto contato" class="profile-img" style="width:300px; height:300px;" onerror="this.src='https://placehold.co/400x400?text=GV'">
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <span><strong>Nome:</strong> ${personalData.contatosLista.nome}</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <span><strong>Email:</strong> ${personalData.contatosLista.email}</span></div>
+                <div class="contact-item"><i class="fas fa-phone-alt"></i> <span><strong>Telefone:</strong> ${personalData.contatosLista.telefone}</span></div>
+                <div class="contact-item"><i class="fab fa-whatsapp"></i> <span><strong>WhatsApp:</strong> ${personalData.contatosLista.whatsapp}</span></div>
+            </div>
+            
+            <hr />
+            <h3><i class="fas fa-paper-plane"></i> Fale comigo</h3>
+            <div class="contact-form" id="formSimulacao">
+                <div class="form-group">
+                    <label>Seu nome *</label>
+                    <input type="text" id="nomeContato" placeholder="Digite seu nome completo" autocomplete="off">
+                    <div class="error-msg" id="errorNome"></div>
+                </div>
+                <div class="form-group">
+                    <label>E-mail *</label>
+                    <input type="email" id="emailContato" placeholder="exemplo@dominio.com">
+                    <div class="error-msg" id="errorEmail"></div>
+                </div>
+                <div class="form-group">
+                    <label>Mensagem *</label>
+                    <textarea rows="3" id="mensagemContato" placeholder="Escreva sua mensagem..."></textarea>
+                    <div class="error-msg" id="errorMsg"></div>
+                </div>
+                <button class="btn-submit" id="btnEnviarForm"><i class="fas fa-share"></i> Enviar mensagem</button>
+                <div id="formFeedback"></div>
+            </div>
+            
+        </div>
+    `;
+}
+
+    /*Roteamento e gerenciamento de página ativa*/
+    let currentPage = "sobre";
+    
+    function loadPage(pageId) {
+        currentPage = pageId;
+        const root = document.getElementById("app-root");
+        if (!root) return;
+        let htmlContent = "";
+        switch(pageId) {
+            case "sobre":
+                htmlContent = renderSobre();
+                break;
+            case "formacao":
+                htmlContent = renderFormacao();
+                break;
+            case "portfolio":
+                htmlContent = renderPortfolio();
+                break;
+            case "contato":
+                htmlContent = renderContato();
+                break;
+            default:
+                htmlContent = renderSobre();
+        }
+        root.innerHTML = htmlContent;
+        
+        /*Atualizar classe ao clicar nos botões*/
+        document.querySelectorAll('.nav-link').forEach(btn => {
+            const btnPage = btn.getAttribute('data-page');
+            if(btnPage === pageId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        /*valdiação pagina contato*/
+        if(pageId === "contato") {
+            attachContactFormValidation();
+        }
+        
+        /* Atualizar título da aba*/
+        let pageTitle = "";
+        if(pageId === "sobre") pageTitle = "Sobre mim";
+        else if(pageId === "formacao") pageTitle = "Formação";
+        else if(pageId === "portfolio") pageTitle = "Portfólio";
+        else pageTitle = "Contato";
+        document.title = `Gabriel Vidal | ${pageTitle}`;
+    }
+    
+    /*fale comigo validando*/
+    function attachContactFormValidation() {
+        const btn = document.getElementById("btnEnviarForm");
+        if(!btn) return;
+        /*Evita duplicação de eventos*/
+        const newBtn = btn.cloneNode(true);
+        if(btn.parentNode) btn.parentNode.replaceChild(newBtn, btn);
+        
+        newBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const nome = document.getElementById("nomeContato")?.value.trim() || "";
+            const email = document.getElementById("emailContato")?.value.trim() || "";
+            const mensagem = document.getElementById("mensagemContato")?.value.trim() || "";
+            let isValid = true;
+            
+            /*reset erros*/
+            document.getElementById("errorNome").innerText = "";
+            document.getElementById("errorEmail").innerText = "";
+            document.getElementById("errorMsg").innerText = "";
+            const feedbackDiv = document.getElementById("formFeedback");
+            if(feedbackDiv) feedbackDiv.innerHTML = "";
+            
+            if(nome === "") {
+                document.getElementById("errorNome").innerText = "Nome é obrigatório.";
+                isValid = false;
+            }
+            if(email === "") {
+                document.getElementById("errorEmail").innerText = "E-mail é obrigatório.";
+                isValid = false;
+            } else if(!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email)) {
+                document.getElementById("errorEmail").innerText = "Insira um e-mail válido (ex: nome@dominio.com).";
+                isValid = false;
+            }
+            if(mensagem === "") {
+                document.getElementById("errorMsg").innerText = "Mensagem não pode estar vazia.";
+                isValid = false;
+            }
+            
+            if(isValid) {
+                if(feedbackDiv) {
+                    feedbackDiv.innerHTML = `<div class="toast-message"><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso! (simulação) Obrigado(a) ${nome}, em breve entrarei em contato.</div>`;
+                    /*Limpar campos após envio*/
+                    document.getElementById("nomeContato").value = "";
+                    document.getElementById("emailContato").value = "";
+                    document.getElementById("mensagemContato").value = "";
+                }
+                setTimeout(() => {
+                    if(feedbackDiv) feedbackDiv.innerHTML = "";
+                }, 5000);
+            } else {
+                if(feedbackDiv) feedbackDiv.innerHTML = `<div class="toast-message" style="background:#fee2e2;color:#b91c1c;"><i class="fas fa-exclamation-triangle"></i> Corrija os campos destacados.</div>`;
+            }
+        });
+        
+        /*limpeza de erros ao digitar*/
+        const nomeInput = document.getElementById("nomeContato");
+        const emailInput = document.getElementById("emailContato");
+        const msgInput = document.getElementById("mensagemContato");
+        if(nomeInput) nomeInput.addEventListener("input", () => document.getElementById("errorNome").innerText = "");
+        if(emailInput) emailInput.addEventListener("input", () => document.getElementById("errorEmail").innerText = "");
+        if(msgInput) msgInput.addEventListener("input", () => document.getElementById("errorMsg").innerText = "");
+    }
+    
+    /* Configura navegação e histórico */
+    function setupNavigation() {
+        const buttons = document.querySelectorAll('.nav-link');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const page = btn.getAttribute('data-page');
+                if(page) {
+                    loadPage(page);
+                    /*histórico para manter URL*/
+                    window.history.pushState({ page }, `Gabriel - ${page}`, `?page=${page}`);
+                }
+            });
+        });
+        
+        window.addEventListener('popstate', (event) => {
+            const params = new URLSearchParams(window.location.search);
+            const pageParam = params.get('page');
+            if(pageParam && (pageParam === "sobre" || pageParam === "formacao" || pageParam === "portfolio" || pageParam === "contato")) {
+                loadPage(pageParam);
+            } else {
+                loadPage("sobre");
+            }
+        });
+        
+        const initialParams = new URLSearchParams(window.location.search);
+        const startPage = initialParams.get('page');
+        if(startPage && (startPage === "sobre" || startPage === "formacao" || startPage === "portfolio" || startPage === "contato")) {
+            loadPage(startPage);
+        } else {
+            loadPage("sobre");
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        setupNavigation();
+    });
+</script>
+</body>
+</html>
